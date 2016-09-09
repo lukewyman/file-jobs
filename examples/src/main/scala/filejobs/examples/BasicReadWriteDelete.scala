@@ -1,16 +1,20 @@
 package filejobs.examples
 
 import filejobs.dsl.FileOps._
-import filejobs.io.FileBackend
+import filejobs.io.{StubBackend}
 
 /**
   * Created by lukewyman on 9/8/16.
   */
 object BasicReadWriteDelete extends App {
 
-  val fbe = new FileBackend
+  import filejobs.dsl.Compiler._
 
-  def job: FileOps[Unit] =
+  val fbe = new StubBackend
+
+  job.foldMap(syncCompiler)
+
+  def job =
     for {
       is <- read("myfile1.txt", "myfiles", fbe)
       _  <- write(is, "yourfile1.txt", "yourfiles", fbe)

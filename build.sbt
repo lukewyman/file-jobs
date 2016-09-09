@@ -9,7 +9,8 @@ lazy val coreSettings = Seq(
   scalaVersion := scalaV,
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats" % catsVersion,
-    "org.typelevel" %% "cats-free" % catsVersion
+    "org.typelevel" %% "cats-free" % catsVersion,
+    "commons-io" % "commons-io" % "2.4"
   )
 )
 

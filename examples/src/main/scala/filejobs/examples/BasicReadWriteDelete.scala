@@ -1,5 +1,6 @@
 package filejobs.examples
 
+import filejobs.dsl.Compiler._
 import filejobs.dsl.FileOps._
 import filejobs.io.StubBackend
 
@@ -7,8 +8,6 @@ import filejobs.io.StubBackend
   * Created by lukewyman on 9/8/16.
   */
 object BasicReadWriteDelete extends App {
-
-  import filejobs.dsl.Compiler._
 
   job.foldMap(syncCompiler)
 

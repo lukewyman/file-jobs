@@ -19,9 +19,9 @@ object FileOps {
   type FileName = String
   type Directory = String
   type Checksum = String
-  type WriteF = (InputStream, FileName, Directory) => Checksum
-  type ReadF = (FileName, Directory) => InputStream
-  type DeleteF = (FileName, Directory) => Unit
+  type WriteF = (InputStream, FileName, Directory) => Option[Checksum]
+  type ReadF = (FileName, Directory) => Option[InputStream]
+  type DeleteF = (FileName, Directory) => Option[Unit]
 
   def write(is: InputStream, fn: FileName, d: Directory)(f: WriteF): FileOps[Checksum] =
     liftF[FileOpsA, String](Write(is, fn, d, f))

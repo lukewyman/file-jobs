@@ -10,7 +10,10 @@ lazy val coreSettings = Seq(
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats" % catsVersion,
     "org.typelevel" %% "cats-free" % catsVersion,
-    "commons-io" % "commons-io" % "2.4"
+    "commons-io" % "commons-io" % "2.4",
+    "org.scalatest" % "scalatest_2.11" % "3.0.0" % "test",
+    "com.amazonaws" % "aws-java-sdk-bom" % "1.11.35",
+    "com.amazonaws" % "aws-java-sdk-s3" % "1.11.35"
   )
 )
 

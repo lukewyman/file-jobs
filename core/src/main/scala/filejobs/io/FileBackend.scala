@@ -19,7 +19,7 @@ object FileBackend {
     val dis: DigestInputStream = new DigestInputStream(is, md)
     try {
       val os = new FileOutputStream(new File(s"$d/$fn"))
-      IOUtils.copyLarge(dis, os)
+      IOUtils.copy(dis, os)
       dis.close
       os.close
       Some(IOUtils.toString(md.digest, "UTF-8"))
@@ -39,5 +39,7 @@ object FileBackend {
       Some(new FileInputStream(s"$d/$fn"))
     } catch { case e: Exception => None}
   }
+
+  def list(d: Directory): Option[Seq[String]] = ???
 }
 

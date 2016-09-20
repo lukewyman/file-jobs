@@ -1,6 +1,7 @@
 package filejobs.examples
 
 import filejobs.dsl.Compiler._
+import filejobs.dsl.FileContext
 import filejobs.dsl.FileOps._
 import filejobs.io.StubBackend
 import cats.implicits._
@@ -14,9 +15,9 @@ object BasicReadWriteDelete extends App {
 
   def job =
     for {
-      is <- read("myfile1.txt", "myfiles")(StubBackend.read)
-      c  <- write(is, "yourfile1.txt", "yourfiles")(StubBackend.write)
-      _  <- delete("myfile1.txt", "myfiles")(StubBackend.delete)
+      is <- read("myfile1.txt", FileContext("myfiles"))(StubBackend.read)
+      c  <- write(is, "yourfile1.txt", FileContext("yourfiles"))(StubBackend.write)
+      _  <- delete("myfile1.txt", FileContext("myfiles"))(StubBackend.delete)
     } yield c
 
 }

@@ -2,6 +2,7 @@ package filejobs.io
 
 import java.security.{DigestInputStream, MessageDigest}
 
+import filejobs.dsl.{FileContext, Context}
 import filejobs.dsl.FileOps._
 import java.io._
 import java.nio.charset.StandardCharsets
@@ -14,11 +15,15 @@ import org.apache.commons.io.IOUtils
   */
 object FileBackend {
 
-  def write(is: InputStream, fn: FileName, d: Directory): Option[Checksum] = {
+  def write(is: InputStream, fn: FileName, c: Context): Option[Checksum] = {
     val md: MessageDigest = MessageDigest.getInstance("MD5")
     val dis: DigestInputStream = new DigestInputStream(is, md)
     try {
-      val os = new FileOutputStream(new File(s"$d/$fn"))
+      val dir = c match {
+        case FileContext(d) => d
+        case _ => throw new IllegalArgumentException("Invalid file context provided")
+      }
+      val os = new FileOutputStream(new File(s"$dir/$fn"))
       IOUtils.copy(dis, os)
       dis.close
       os.close
@@ -26,20 +31,28 @@ object FileBackend {
     } catch { case e: Exception => None }
   }
 
-  def delete(fn: FileName, d: Directory): Option[Unit] = {
+  def delete(fn: FileName, c: Context): Option[Unit] = {
     try {
-      val f = new File(s"$d/$fn")
+      val dir = c match {
+        case FileContext(d) => d
+        case _ => throw new IllegalArgumentException("Invalid file context provided")
+      }
+      val f = new File(s"$dir/$fn")
       if (f.delete) Some(())
       else None
     } catch { case e: Exception => None}
   }
 
-  def read(fn: FileName, d: Directory): Option[InputStream] = {
+  def read(fn: FileName, c: Context): Option[InputStream] = {
     try {
-      Some(new FileInputStream(s"$d/$fn"))
+      val dir = c match {
+        case FileContext(d) => d
+        case _ => throw new IllegalArgumentException("Invalid file context provided")
+      }
+      Some(new FileInputStream(s"$dir/$fn"))
     } catch { case e: Exception => None}
   }
 
-  def list(d: Directory): Option[Seq[String]] = ???
+  def list(c: Context): Option[Seq[String]] = ???
 }
 

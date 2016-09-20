@@ -37,6 +37,7 @@ object S3Backend {
       }
       val s3 = new AmazonS3Client
       s3.deleteObject(bucket, s"$directory/$fn")
+
       Some(())
     } catch { case e: Exception => None }
   }
@@ -49,6 +50,7 @@ object S3Backend {
       }
       val s3 = new AmazonS3Client
       val obj = s3.getObject(bucket, s"$directory/$fn")
+
       Some(obj.getObjectContent)
     } catch { case e: Exception => None }
   }
@@ -64,6 +66,7 @@ object S3Backend {
         .withBucketName(bucket)
         .withPrefix(directory))
       val oll = ol.getObjectSummaries.toList
+
       Some(oll.map(_.getKey))
     } catch { case e: Exception => None }
   }

@@ -26,7 +26,7 @@ object FileOps {
   type WriteOp = (InputStream, FileName, Context) => Option[Checksum]
   type ReadOp = (FileName, Context) => Option[InputStream]
   type DeleteOp = (FileName, Context) => Option[Unit]
-  type ListOp = Context => Seq[String]
+  type ListOp = Context => Option[Seq[String]]
 
   def write(is: InputStream, fn: FileName, c: Context)(f: WriteOp): FileOps[Checksum] =
     liftF[FileOpsA, String](Write(is, fn, c, f))

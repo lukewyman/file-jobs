@@ -1,12 +1,12 @@
 # file-jobs #
 
-file-jobs is a functional scala library for creating file transfer jobs. By providing an easy-to-use DSL, users can mark up the flow of a job without putting too much effort into the plumbing. I'm still wrestling with the basic approach to this thing, but I'll probably give it a more impressive name soon. 
+file-jobs is a functional scala library for creating file transfer jobs. The approach is to use the Free Monad to abstact away file access so that file transfer jobs can be written as pure functions. 
 
 Currently, the library only supports reading and writing files using `InputStreams`, but I'm not opposed to supporting  more intricate batch job writing in the future.
 
 ## Motivation ##
 
-This library is inspired by a recent project that I worked on professionally. The need was for a basic file job application to collect third party data that was published through an XML endpoint. The design we came up with was decidedly OOP. With the exception of a handful of Options and calls to map and flatMap, It really looked like an assortment of classic DAOs, with separation of concerns dealt with using OO composition. This project is my attempt to accomplish the same task in a purely functional way. Instead of creating a stand-alone app, I'm designing it as a library, complete with friendly interfaces and a DSL that others can use to quickly create file job projects.
+This library is inspired by a recent project that I worked on professionally. The need was for a basic file job application to collect third party data that was published through an XML endpoint. The design we came up with was decidedly OOP. With the exception of a handful of Options and calls to map and flatMap, It really looked like an assortment of classic DAOs, with separation of concerns dealt with using OO composition. This project is my attempt to accomplish the same task in a purely functional way. Instead of creating a stand-alone app, I'm designing it as a library. I'd like to figure out how to implement a DSL to make writing file jobs even easier.
 
 ## Architecture and Design ##
 
@@ -21,7 +21,7 @@ As of this time, the library supports disk and s3 file types, but other IO scena
 
 ### Approach ###
 
-As a functional library, the core problem is how to tackle side effects. Reading, writing and deleting files is by definition side-effectful, so the question becomes how to isolate side-effects. At the same time, I wanted to present users with a simple DSL for defining and submitting file jobs. Thus, the key abstraction for the file-jobs engine is the [Free Monad](https://github.com/typelevel/cats/blob/master/docs/src/main/tut/freemonad.md). Users create file jobs using the DSL, and then submit them with a call to `FoldMap`, using the `Interpreter` or `Compiler`. 
+As a functional library, the core problem is how to tackle side effects. Reading, writing and deleting files is by definition side-effectful, so the question becomes how to isolate side-effects. At the same time, I wanted to present users with a simple interface for defining and submitting file jobs. Thus, the key abstraction for the file-jobs engine is the [Free Monad](https://github.com/typelevel/cats/blob/master/docs/src/main/tut/freemonad.md). Users create file jobs using the interface, and then submit them with a call to `FoldMap`, using the `Interpreter` or `Compiler`. 
 
 ### Future Enhancements ###
 
@@ -49,14 +49,3 @@ object BasicReadWriteDelete extends App {
 
 }
 ```
-
-
-## Contributing and Participation ##
-
-This project is still in its infancy, and as described, is based on a use-case from a project I worked on previously. While I have a basic idea of what I want this library to be able to do, 
-
-## License ##
-
-file-jobs is licensed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) (the "License"); you may not use this software except in compliance with the License.
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.

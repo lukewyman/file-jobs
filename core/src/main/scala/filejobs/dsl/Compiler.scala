@@ -14,6 +14,7 @@ object Compiler {
       case Write(is, fn, c, f) => f(is, fn, c)
       case Read(fn, c, f) => f(fn, c)
       case Delete(fn, c, f) => f(fn, c)
+      case List(c, f) => f(c)
     }
   }
 

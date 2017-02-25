@@ -32,4 +32,10 @@ object StubBackend {
     Some(new ByteArrayInputStream(content.getBytes(StandardCharsets.UTF_8)))
   }
 
+  def list(c: Context): Option[Seq[String]] = {
+    val dir = c match { case FileContext(d) => d}
+    println(s"Listing the files in directory $dir")
+    Some(Seq("file1.txt", "file2.txt", "file3.txt", "file4.txt"))
+  }
+
 }

@@ -3,8 +3,9 @@ package filejobs.io
 import java.io.{ByteArrayInputStream, InputStream}
 import java.nio.charset.StandardCharsets
 
-import filejobs.dsl.{Context, FileContext}
-import filejobs.dsl.FileOps._
+import filejobs.{Context, FileOps}
+import filejobs.FileContext
+import FileOps._
 import org.apache.commons.io.IOUtils
 
 /**

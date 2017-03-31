@@ -1,12 +1,14 @@
 package filejobs.io
 
 import java.io.InputStream
+import filejobs.{Context, FileOps}
+
 import scala.collection.JavaConversions._
 import com.amazonaws.regions.{Region, Regions}
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.{ListObjectsRequest, ObjectMetadata}
-import filejobs.dsl.{S3Context, Context}
-import filejobs.dsl.FileOps._
+import filejobs.S3Context
+import FileOps._
 
 /**
   * Created by lukewyman on 9/15/16.

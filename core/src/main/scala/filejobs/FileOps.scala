@@ -1,10 +1,10 @@
-package filejobs.dsl
+package filejobs
 
 import java.io.InputStream
 
 import cats.free.Free
 import cats.free.Free.liftF
-import filejobs.dsl.FileOps._
+import filejobs.FileOps._
 
 /**
   * Created by lukewyman on 9/7/16.

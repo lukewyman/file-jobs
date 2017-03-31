@@ -1,6 +1,5 @@
-package filejobs.dsl
+package filejobs
 
-import cats.arrow.FunctionK
 import cats.~>
 
 /**

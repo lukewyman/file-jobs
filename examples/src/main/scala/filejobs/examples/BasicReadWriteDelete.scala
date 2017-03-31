@@ -1,8 +1,8 @@
 package filejobs.examples
 
-import filejobs.dsl.Compiler._
-import filejobs.dsl.FileContext
-import filejobs.dsl.FileOps._
+import filejobs.{FileOps, FileContext, Compiler}
+import Compiler._
+import FileOps._
 import filejobs.io.StubBackend
 import cats.implicits._
 

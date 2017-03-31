@@ -2,8 +2,8 @@ package filejobs.examples
 
 import java.io.InputStream
 
-import filejobs.dsl.FileOps._
-import filejobs.dsl.FileContext
+import filejobs.{FileOps, FileContext}
+import FileOps._
 import filejobs.io.StubBackend
 
 /**
@@ -11,9 +11,5 @@ import filejobs.io.StubBackend
   */
 object CopyADirectory extends App {
 
-  def job: FileOps[Seq[FileOps[InputStream]]] = for {
-    fns <- list(FileContext("myfiles"))(StubBackend.list)
-    is <- fns.tra
-  } yield is
-
+  def job: FileOps[Seq[FileOps[InputStream]]] = ???
 }

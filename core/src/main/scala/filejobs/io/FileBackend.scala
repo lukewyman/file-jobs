@@ -2,8 +2,9 @@ package filejobs.io
 
 import java.security.{DigestInputStream, MessageDigest}
 
-import filejobs.dsl.{FileContext, Context}
-import filejobs.dsl.FileOps._
+import filejobs.{Context, FileOps}
+import filejobs.FileContext
+import FileOps._
 import java.io._
 import java.nio.charset.StandardCharsets
 

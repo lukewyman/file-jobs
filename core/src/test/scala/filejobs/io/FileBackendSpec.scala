@@ -3,8 +3,9 @@ package filejobs.io
 import java.io.{File, ByteArrayInputStream}
 import java.nio.charset.StandardCharsets
 
-import filejobs.dsl.{FileContext, Context}
-import filejobs.dsl.FileOps.FileName
+import filejobs.{FileContext, FileOps}
+import filejobs.dsl.FileContext
+import FileOps.FileName
 import org.scalatest.{Matchers, FlatSpec}
 
 /**
